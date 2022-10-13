@@ -5,18 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -27,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import com.agkminds.tipcalculator.ui.theme.TipCalculatorTheme
 import java.text.NumberFormat
 import kotlin.math.ceil
-import kotlin.math.floor
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +45,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun TipCalculatorApp() {
+    Scaffold(
+        topBar = { TopBar() },
+        content = { TipTimeScreen() }
+    )
+}
+
+
+@Composable
 fun TipTimeScreen() {
     var amountInput by remember { mutableStateOf("") }
     var tipInput by remember { mutableStateOf("") }
@@ -56,6 +65,7 @@ fun TipTimeScreen() {
     val focusManager = LocalFocusManager.current
 
     val tip = calculateTip(amount, tipPercent, roundUp)
+
 
     Column(modifier = Modifier
         .padding(32.dp),
@@ -140,6 +150,20 @@ fun RoundTheTipRow(
     }
 }
 
+@Composable
+fun TopBar(modifier: Modifier = Modifier) {
+    Box(modifier = modifier
+        .fillMaxWidth()
+        .clip(RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp))
+        .height(70.dp)
+        .background(MaterialTheme.colors.primaryVariant),
+        contentAlignment = Alignment.Center) {
+        Text(text = "Tip Calculator",
+            fontSize = 32.sp,
+            color = Color.White)
+    }
+}
+
 @VisibleForTesting
 internal fun calculateTip(
     amount: Double,
@@ -157,6 +181,6 @@ internal fun calculateTip(
 @Composable
 fun DefaultPreview() {
     TipCalculatorTheme {
-        TipTimeScreen()
+        TipCalculatorApp()
     }
 }
