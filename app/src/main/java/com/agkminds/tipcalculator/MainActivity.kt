@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
-                    TipTimeScreen()
+                    TipCalculatorApp()
                 }
             }
         }
@@ -110,6 +110,10 @@ fun TipTimeScreen() {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
+        Spacer(Modifier.height(50.dp))
+        Image(painter = painterResource(id = R.drawable.waiter_tip),
+            contentDescription = "Waiter Tip Image",
+            modifier = Modifier.size(4000.dp))
     }
 }
 
