@@ -14,8 +14,10 @@ private val DarkColorPalette = darkColors(
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primaryVariant = DarkBrown,
+    secondary = Teal200,
+    onSurface = DarkBrown,
+    onBackground = DarkBlue
 
     /* Other default colors to override
     background = Color.White,
@@ -30,7 +32,7 @@ private val LightColorPalette = lightColors(
 @Composable
 fun TipCalculatorTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colors = if (darkTheme) {
         DarkColorPalette
