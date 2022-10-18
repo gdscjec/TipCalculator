@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
-                    TipTimeScreen()
+                    TipCalculatorApp()
                 }
             }
         }
@@ -68,7 +70,9 @@ fun TipTimeScreen() {
 
 
     Column(modifier = Modifier
-        .padding(32.dp),
+        .padding(horizontal = 32.dp)
+        .padding(top = 32.dp)
+        .fillMaxHeight(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
 
@@ -106,6 +110,10 @@ fun TipTimeScreen() {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
+        Spacer(Modifier.height(50.dp))
+        Image(painter = painterResource(id = R.drawable.waiter_tip),
+            contentDescription = "Waiter Tip Image",
+            modifier = Modifier.size(4000.dp))
     }
 }
 
